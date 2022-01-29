@@ -8,7 +8,7 @@ const StyledSideNav = styled.div`
     width: 300px;     /* Set the width of the sidebar */
     z-index: 1;      /* Stay on top of everything */
       /* Stay at the top */
-    background-color: black; /* Black */
+    background-color: skyblue; /* Black */
     overflow-x: hidden;     /* Disable horizontal scroll */
     padding-top: 20px;
     align-content:end;
@@ -81,26 +81,21 @@ const StyledNavItem = styled.div`
     margin-bottom: 0;   /* Puts space between NavItems */
     text-decoration:none;
     text-decoration-line:none;
-     padding-left:10px;
+    
     h1 {
         text-align: center;
-      color: ${(props) => props.active ? "black" : "white"};
-      background-color:${(props) => props.active ? "orange" : "black"};
+      color: ${(props) => props.active ? "white" : "black"};
       text-decoration:none;
       text-decoration-line:none;
-      border-radius:10px;
-      margin-right:15px;
-      margin-left:15px;
       :hover {
           opacity: 0.5;
           text-decoration: none; /* Gets rid of underlining of icons */
           text-decoration-line:none;
-          background-color:orange;
+          background-color:white;
           color:black;
       }
 
 `;
-
 class NavItem extends React.Component {
     handleClick = () => {
         const { path, onItemClick } = this.props;

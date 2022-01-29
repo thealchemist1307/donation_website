@@ -3,7 +3,7 @@ import { Nav, Navbar} from 'react-bootstrap';
 import styled from 'styled-components';
 import Logo from "../../assets/header.png"
 const Styles = styled.div`
-.navbar { background-color: #e89b00;
+.navbar { background-color: #003396;
             border-width:5px }
   a, .navbar-nav, .navbar-light .nav-link {
     color: #9FFFCB;
@@ -24,7 +24,7 @@ const Styles = styled.div`
 export const NavigationBar = () => (
   <Styles>
     <Navbar expand="lg">
-      <Navbar.Brand href="/Donator/"> <label style={{fontSize:"50px",color:'black',fontWeight:'bold'}}>
+      <Navbar.Brand href="/Donator/"> <label style={{fontSize:"50px",color:'white',fontWeight:'bold'}}>
         Donation Website</label> </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
      

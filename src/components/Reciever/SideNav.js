@@ -8,7 +8,7 @@ const StyledSideNav = styled.div`
     width: 300px;     /* Set the width of the sidebar */
     z-index: 1;      /* Stay on top of everything */
       /* Stay at the top */
-    background-color: black; /* Black */
+    background-color: skyblue; /* Black */
     overflow-x: hidden;     /* Disable horizontal scroll */
     padding-top: 20px;
     align-content:end;
@@ -30,15 +30,9 @@ class SideNav extends React.Component {
                 },
                 {
                   path: '/Reciever/SearchClass',
-                  name: 'Search Class',
+                  name: 'Search Donation',
                   css: 'fa fa-fw fa-clock',
                   key: 2
-                },
-                {
-                  path: '/Reciever/MyClass',
-                  name: 'My Class',
-                  css: 'fas fa-hashtag',
-                  key: 3
                 },
               ]
         }
@@ -84,8 +78,7 @@ const StyledNavItem = styled.div`
     
     h1 {
         text-align: center;
-      color: ${(props) => props.active ? "black" : "white"};
-      background-color:${(props) => props.active ? "white" : "black"};
+      color: ${(props) => props.active ? "white" : "black"};
       text-decoration:none;
       text-decoration-line:none;
       :hover {

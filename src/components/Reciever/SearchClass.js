@@ -3,6 +3,9 @@ import Select from "react-select";
 import SearchClassCard from "./SearchClassCard"
 import PlainList from "flatlist-react"
 import axios from "axios"
+import { CardColumns } from 'react-bootstrap';
+import DonationCard from './DonationCard';
+import { connect } from 'react-redux';
 class SearchClass extends React.Component {
 
     constructor(props) {
@@ -113,30 +116,54 @@ class SearchClass extends React.Component {
           
         }
     }
+    cabcards =()=>
+    { return(
+      this.props.donations.map((item, index) => {
+       
+       console.log(item)
+      return (
+        <div style={{width:'48%'}}>
+        <DonationCard
+          key={index}
+          name={item.name}
+          subject={item.subject}
+          time={item.time}
+          fees={item.fees}
+          status={item.status}
+          id={item.id}
+        ></DonationCard>
+        </div>
+      );
+      
+    }))
+  }
     render() {
       return (
-        <div style={{backgroundColor:"#dbdbdb",borderRadius:"25px",color:"black", height:"1000px",textAlign:"center"}}>
+        <div style={{backgroundColor:"#dbdbdb",borderRadius:"25px",color:"black", height:"1000px",textAlign:"center",overflowY:'scroll'}}>
         <h1 style={{paddingTop:"30px",color:"black",fontSize:"50px"}}>Search a Class</h1>
         <div style={{paddingLeft:"50px",display:"flex",alignItems:"start"}}>
-        <Select placeholder="Subject List" onChange={this.fromSelect} styles={this.customStyles} options={this.options}
+        <Select placeholder="Commodity List" onChange={this.fromSelect} styles={this.customStyles} options={this.options}
               isSearchable={true}
             />
             
         <button onClick={this.searchClass} style={{fontSize:"30px",marginLeft:"20px"}} >Search</button>
         
         </div>
-          <div style={{marginTop:"50px",marginRight:"50px",marginLeft:"50px",width:"1825px"}}>
-          <PlainList
-              list={this.state.requests}
-              renderItem={this.renderClass}
-              renderOnScroll
-              />
-          </div>
+        <CardColumns style={{paddingTop:"50px",width:'100%',display:'flex'
+      ,flexDirection:'row',flexWrap:'wrap',justifyContent:'center'}}>
+        {this.cabcards()}
+      </CardColumns>
+
         </div>
   
       );
     }
   }
   
+  const mapStateToProps = state => {
+    return {
+        donations: state.donation.donation,
   
-  export default SearchClass;
+    }
+  };
+  export default connect(mapStateToProps)(SearchClass);
