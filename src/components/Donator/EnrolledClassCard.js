@@ -22,7 +22,7 @@ class EnrolledClassCard extends React.Component {
   render() {
 
     return (
-        <Card style={{ width: '300px',borderRadius:"10px",marginLeft:"10px" }}>
+        <Card style={{ width:"90%",borderRadius:"10px",marginLeft:"0px" }}>
     <Card.Header style={{fontSize:"30px"}}>{this.props.subject}</Card.Header>
   <ListGroup style={{textAlign:"start",fontSize:"20px"}} variant="flush">
   <ListGroup.Item style={{borderBottomWidth:"4px"}}>Name : {this.props.name}</ListGroup.Item>
@@ -31,7 +31,7 @@ class EnrolledClassCard extends React.Component {
     <ListGroup.Item style={{borderBottomWidth:"4px"}}>Date : {this.props.date} </ListGroup.Item>
     <ListGroup.Item >Status : {this.props.status}</ListGroup.Item>
   </ListGroup>
-  <Card.Footer  style={{fontSize:"30px"}}>Delete</Card.Footer>
+
 </Card>
        
     );

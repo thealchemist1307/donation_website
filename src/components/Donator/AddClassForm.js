@@ -1,12 +1,96 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 import Select from "react-select";
 import TimePicker from 'react-times';
  import axios from "axios"
 // use material theme
 import DatePicker from 'react-date-picker';
-
+import { useHistory } from "react-router-dom";
 import 'react-times/css/material/default.css';
+import { Button, Form } from 'react-bootstrap';
+import { ToastProvider, useToasts } from 'react-toast-notifications'
+import { donation } from '../../redux/donation';
+import "../../css/addClass.css"
+const AddForm = (props) => {
+  const { addToast } = useToasts()
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+  const [picker,setPicker]=useState("")
+  let history = useHistory();
+
+  const onSubmit = async value => {
+    if(props.map.has(email))
+    {
+      const item =props.map.get(email)
+      if(item.password!=password)
+      {
+        console.log("Email Error")
+        addToast('Password Incorrect', { appearance:"error"})
+      }
+      else{
+        console.log("Login Sucess")
+
+      }
+    }
+    else
+    {
+      console.log("Password Error")
+      addToast('Password Incorrect', { appearance:"error"})
+    }
+
+  }
+ 
+  return (
+        <Form style={{display:'flex',alignItems:'flex-start',flexDirection:'column'}}>
+  <Form.Group style={{width: "100%"}} className="mb-3" controlId="formBasicEmail">
+  <Form.Label  style={{textAlign: "left",fontSize: "30px",width: "100%"}}>Commodity</Form.Label>
+    <div style={{display:"flex",flexDirection:'row',width:'100%',}}>
+   <Select onChange={(event)=>setPicker(event.label)} styles={props.customStyles} options={props.options}
+         isSearchable={true}
+       />
+  </div>
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="formBasicPassword">
+    <Form.Label  style={{textAlign: "left",fontSize: "30px",width: "100%"}}>Address</Form.Label>
+    <Form.Control 
+    onChange={e =>{
+      console.log(e.target.value)
+      setPassword( e.target.value )}}
+    style={{fontSize:'30px'}} type="input" placeholder="Your Address" />
+  </Form.Group>
+  <Form.Group style={{width: "100%"}} className="mb-3" controlId="formBasicPassword">
+    <Form.Label  style={{textAlign: "left",fontSize: "30px",width: "100%"}}>Time</Form.Label>
+    <TimePicker
+
+onTimeChange={props.onTimeChange}    
+style={{width:'100%'}}
+time={props.time} // initial time, default current time
+
+timeMode="12" // use 24 or 12 hours mode, default 24
+/> 
+  </Form.Group>
+  <Form.Group style={{width: "100%"}} className="mb-3" controlId="formBasicPassword">
+    <Form.Label  style={{textAlign: "left",fontSize: "30px",width: "100%"}}>Time</Form.Label>
+      <div style={{backgroundColor:'transparent',fontSize:'30px'}}>
+      <DatePicker
+      className="datePicker"
+    style={{width:"100%",fontSize:"30px"}}
+    format="dd-MM-y"
+  onChange={(item)=>{}}
+  value={new Date()}
+      
+/>
+      </div>
+  </Form.Group>
+  <Button onClick={()=>{onSubmit()}} style={{fontSize:'30px'}} variant="primary" type="submit">
+    Donate
+  </Button>
+</Form>
+
+  )
+}
+
 class AddClassForm extends React.Component {
   options = [
     { value: 'chocolate', label: 'Chocolate' },
@@ -27,13 +111,13 @@ class AddClassForm extends React.Component {
         this.handleFees=this.handleFees.bind(this)
         this.handleSubmit=this.handleSubmit.bind(this)
       
-        
+        this.onTimeChange=this.onTimeChange.bind(this)
       }
     customStyles = {
       container: provided => ({
         ...provided,
         display: "inline-block",
-        width: "300px",
+        width: "100%",
         minHeight: "1px",
         height:"50px",
         textAlign: "left",
@@ -50,7 +134,7 @@ class AddClassForm extends React.Component {
         ...provided,
         minHeight: "1px",
         height: "40px",
-        marginLeft: "160px",
+        marginLeft: "0px",
         background: "#fff"
       }),
       placeholder: provided => ({
@@ -145,64 +229,8 @@ class AddClassForm extends React.Component {
         this.setState({id:res.data[0].Counter});
       })
       return (
-        <div  >
-          
-        <form >
-        <div style={{paddingTop:"20px",paddingBottom:"20px",textAlign:'start'}}>
-        <label style={styles.subject}>Commodity :</label>
-        <Select onChange={this.fromSelect} styles={this.customStyles} options={this.options}
-              isSearchable={true}
-            />
-         
-         </div>
-        <div  style={{paddingTop:"20px",paddingBottom:"20px",textAlign:'start'}}>
-        <label style={styles.fees}>
-          
-          Address :</label>
-          <input type="text" onChange={this.handleFees} style={{paddingLeft:"20px",width:'300px',height:"45px",borderRadius:"10px"}} value={this.state.fees}  />
-        
-        </div>
-        
-        <div style={{paddingTop:"20px",paddingBottom:"20px",width:"500px",}}>
-          <table>
-          <tr>
-          <td>
-          <label style={{fontSize:"30px"}}>Time :</label> 
-          </td>
-          <td style={{width:"300px",height:"35px"}}>
-          <TimePicker
-   
-    onTimeChange={this.onTimeChange.bind(this)}    
-    customStyles
-    time={this.state.time} // initial time, default current time
-    theme="material"
-    timeMode="12" // use 24 or 12 hours mode, default 24
-      /> </td>
-      </tr>
-      </table>
-        </div>
-        <div style={{paddingTop:"20px",paddingBottom:"20px",width:"500px",}}>
-          <table>
-          <tr>
-          <td>
-          <label style={{fontSize:"30px"}}>Date :</label> 
-          </td>
-          <td style={{width:"300px",height:"35px"}}>
-          <DatePicker
-          
-          format="dd-MM-y"
-        onChange={(item)=>{this.setState({date:item})}}
-        value={this.state.date}
-      />
-       </td>
-      </tr>
-      </table>
-        </div>
-        <div style={{paddingTop:"20px",paddingBottom:"20px"}}>
-        <button style={{fontSize:"40px"}} onClick={this.handleSubmit} type="button" >Donate</button>
-        </div>
-      </form>
-    </div>
+      <AddForm customStyles={this.customStyles}
+      options={this.options}  time={this.state.time}/>
   
       );
     }
@@ -218,3 +246,63 @@ class AddClassForm extends React.Component {
     
     }
   export default AddClassForm;
+
+
+//   <div  >
+          
+//   <form >
+//   <div style={{paddingTop:"20px",paddingBottom:"20px",textAlign:'start'}}>
+//   <label style={styles.subject}>Commodity :</label>
+//   <Select onChange={this.fromSelect} styles={this.customStyles} options={this.options}
+//         isSearchable={true}
+//       />
+   
+//    </div>
+//   <div  style={{paddingTop:"20px",paddingBottom:"20px",textAlign:'start'}}>
+//   <label style={styles.fees}>
+    
+//     Address :</label>
+//     <input type="text" onChange={this.handleFees} style={{paddingLeft:"20px",width:'300px',height:"45px",borderRadius:"10px"}} value={this.state.fees}  />
+  
+//   </div>
+  
+//   <div style={{paddingTop:"20px",paddingBottom:"20px",width:"500px",}}>
+//     <table>
+//     <tr>
+//     <td>
+//     <label style={{fontSize:"30px"}}>Time :</label> 
+//     </td>
+//     <td style={{width:"300px",height:"35px"}}>
+// //     <TimePicker
+
+// // onTimeChange={this.onTimeChange.bind(this)}    
+// // customStyles
+// // time={this.state.time} // initial time, default current time
+
+// // timeMode="12" // use 24 or 12 hours mode, default 24
+// /> </td>
+// </tr>
+// </table>
+//   </div>
+//   <div style={{paddingTop:"20px",paddingBottom:"20px",width:"500px",}}>
+//     <table>
+//     <tr>
+//     <td>
+//     <label style={{fontSize:"30px"}}>Date :</label> 
+//     </td>
+//     <td style={{width:"300px",height:"35px"}}>
+//     <DatePicker
+    
+//     format="dd-MM-y"
+//   onChange={(item)=>{this.setState({date:item})}}
+//   value={this.state.date}
+// />
+//  </td>
+// </tr>
+// </table>
+//   </div>
+//   <div style={{paddingTop:"20px",paddingBottom:"20px"}}>
+//   <button style={{fontSize:"40px"}} onClick={this.handleSubmit} type="button" >Donate</button>
+//   </div>
+// </form>
+// </div>

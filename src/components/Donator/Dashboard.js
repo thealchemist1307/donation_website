@@ -16,20 +16,54 @@ class Dashboard extends React.Component {
               status:"",
               date:"12/02/2022",
               id:"1",
-            }
+            },
+            {
+              name:"Shivam Mishra",
+              subject:"Commodity 1",
+              time:"12:20 PM",
+              fees:"Address",
+              status:"",
+              date:"12/02/2022",
+              id:"1",
+            },
+            {
+              name:"Shivam Mishra",
+              subject:"Commodity 1",
+              time:"12:20 PM",
+              fees:"Address",
+              status:"",
+              date:"12/02/2022",
+              id:"1",
+            },
+            {
+              name:"Shivam Mishra",
+              subject:"Commodity 1",
+              time:"12:20 PM",
+              fees:"Address",
+              status:"",
+              date:"12/02/2022",
+              id:"1",
+            },
+            
           ]
         };
     }
   
     render() {
       return (
-        <div style={{backgroundColor:"#dbdbdb",borderRadius:"25px",color:"black", height:"1000px",textAlign:"center"}}>
+        <div style={{backgroundColor:"#dbdbdb",borderRadius:"25px",color:"black", height:"1070px",textAlign:"center"}}>
         <h1 style={{color:"black",fontSize:"50px"}}>Dashboard</h1>
         <div style={styles.div}>
           <Container fluid>
           <Row>
-            <Col style={styles.enrolledCol}  ><RecentDonation data={this.state.data} /></Col>
-            <Col style={styles.form}><Statistics addData={this.addData}/></Col>
+            <Col style={styles.enrolledCol}  >
+              <div style={{}}>
+              <RecentDonation data={this.state.data} />
+              </div>
+              </Col>
+            <Col style={styles.form}>
+              <Statistics addData={this.addData}/>
+              </Col>
           </Row>
           </Container>
     </div>
@@ -49,7 +83,9 @@ class Dashboard extends React.Component {
                   marginBottom:"50px",
                   height:"900px",
                   borderWidth:"20px",
-                  borderColor:"black"},
+                  borderColor:"black",
+                 display:'flex',
+                flexWrap:'wrap'},
     form:{
     display:"flex",
     marginTop:"50px",

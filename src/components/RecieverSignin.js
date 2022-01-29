@@ -13,7 +13,7 @@ const SigninButton = () => {
     
   }
  
-  return <div> <Link to="/DonatorSignin/" className="Donator">Sign In</Link></div>
+  return <div> <Link to="/Donator/" className="Donator">Sign In</Link></div>
 }
 const SignUpButton = () => {
   const { addToast } = useToasts()
@@ -26,7 +26,7 @@ const SignUpButton = () => {
  
   return<div> <a href="./DonatorLogin"> <button onClick={onSubmit}  className="Reciever">Sign Up</button> </a></div>
 }
-class DonatorLogin extends React.Component {
+class RecieverSignin extends React.Component {
 
   constructor(props) {
       super(props);
@@ -59,5 +59,5 @@ class DonatorLogin extends React.Component {
 }
 
 
-export default  (DonatorLogin);
+export default  (RecieverSignin);
           

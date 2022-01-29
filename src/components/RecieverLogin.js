@@ -5,7 +5,7 @@ import { ToastProvider, useToasts } from 'react-toast-notifications'
 import {Link} from "react-router-dom"
 const SignInButton = () => {
  
-  return <div> <Link to="/Reciever/" className="Donator">Sign In</Link></div>
+  return <div> <Link to="/RecieverSignin/" className="Donator">Sign In</Link></div>
 }
 const SignUpButton = () => {
   const { addToast } = useToasts()

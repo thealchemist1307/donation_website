@@ -2,6 +2,10 @@ import React from 'react';
 import { Container , Col , Row } from 'react-bootstrap'
 import AddClassForm from "./AddClassForm"
 import EnrolledClass from "./EnrolledClass"
+import {connect} from "react-redux"
+import {donation} from "../../redux/donation"
+import { ToastProvider, useToasts } from 'react-toast-notifications'
+
 class AddClass extends React.Component {
 
     constructor(props) {
@@ -16,7 +20,7 @@ class AddClass extends React.Component {
               status:"",
               date:"12/02/2022",
               id:"1",
-            }
+            },
           ]
         };
     }
@@ -26,12 +30,14 @@ class AddClass extends React.Component {
     render() {
       return (
         <div style={styles.div}>
+          <ToastProvider>
           <Container fluid>
           <Row>
             <Col style={styles.enrolledCol}  ><EnrolledClass data={this.state.data} /></Col>
             <Col style={styles.form}><AddClassForm addData={this.addData}/></Col>
           </Row>
           </Container>
+          </ToastProvider>
     </div>
   
       );
@@ -62,4 +68,8 @@ justifyContent:"space-around"}
 
     
     }
-  export default AddClass;
+const mapDispatchToProps = dispatch => ({
+  donation: (item) => dispatch(donation(item)),
+});
+    
+export default connect(null,mapDispatchToProps)(AddClass);

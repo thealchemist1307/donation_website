@@ -4,6 +4,7 @@
         height: 100%;
         width: 100%;
         zoom:67%;
+        
       }
 
       body {
@@ -139,6 +140,23 @@
     height: 664.00px;
     left: 1212.00px;
     top: 238.00px;
+
+}
+.login .signIn {
+  position: absolute;
+    box-sizing: border-box;
+
+  -ms-transform-origin: center;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+    opacity: 1;
+    cursor: default;
+    width: 500.00px;
+  height: 200.00px;
+  left: 1350.00px;
+  top: 450.00px;
+  display: flex;
+  align-items:'center';
 
 }
 .login .Donator:hover,
@@ -288,9 +306,9 @@
       box-shadow: none;
       overflow-x: unset;
       overflow-y: unset;
-      width: 131.00px;
+      width: 500.00px;
     height: 77.00px;
-    left: 1450.00px;
+    left: 1350.00px;
     top: 303.00px;
 
 }
@@ -338,8 +356,8 @@
       box-shadow: none;
       width: 1000.00px;
     height: 628.00px;
-    left: 50.00px;
-    top: 0.00px;
+    left: 150.00px;
+    top: 200.00px;
 
 }
 

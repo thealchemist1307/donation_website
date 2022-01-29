@@ -11,7 +11,16 @@ const data=[
     fees:"",
     status:"",
     id:"",
-  }
+  },
+  {
+    name:"",
+    subject:"",
+    time:"",
+    fees:"",
+    status:"",
+    id:"",
+  },
+
 ]
 class RecentDonation extends React.Component {
 
@@ -60,9 +69,10 @@ class RecentDonation extends React.Component {
         
       });
       return (
-        <div style={{paddingLeft:"20px"}} >
+        <div style={{paddingLeft:"0px",width:"100%"}} >
         <h1 style={{color:"black",fontSize:"50px"}}>Recent Donations Made</h1>
-      <CardColumns style={{paddingTop:"50px"}}>
+      <CardColumns style={{paddingTop:"50px",width:'100%',display:'flex'
+      ,flexDirection:'row',flexWrap:'wrap',justifyContent:'center'}}>
         {cabcards}
       </CardColumns>
     </div>
