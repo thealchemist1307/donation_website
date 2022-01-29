@@ -11,32 +11,29 @@ import { Button, Form } from 'react-bootstrap';
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import { donation } from '../../redux/donation';
 import "../../css/addClass.css"
+import {addDonation} from "../../redux/ActionCreator"
+import { connect } from 'react-redux';
 const AddForm = (props) => {
   const { addToast } = useToasts()
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [picker,setPicker]=useState("")
+  const [time,setTime]=useState("")
+  const [date,setDate]=useState(new Date())
   let history = useHistory();
 
   const onSubmit = async value => {
-    if(props.map.has(email))
-    {
-      const item =props.map.get(email)
-      if(item.password!=password)
-      {
-        console.log("Email Error")
-        addToast('Password Incorrect', { appearance:"error"})
-      }
-      else{
-        console.log("Login Sucess")
-
-      }
+    const newRequest={
+      id:1,
+      name:props.data.name,
+      email:props.data.email,
+      subject:picker,
+      fees:password,
+      time:time,
+      date:date,
+      status:"pending"
     }
-    else
-    {
-      console.log("Password Error")
-      addToast('Password Incorrect', { appearance:"error"})
-    }
+    props.handleSubmit(newRequest)
 
   }
  
@@ -45,7 +42,8 @@ const AddForm = (props) => {
   <Form.Group style={{width: "100%"}} className="mb-3" controlId="formBasicEmail">
   <Form.Label  style={{textAlign: "left",fontSize: "30px",width: "100%"}}>Commodity</Form.Label>
     <div style={{display:"flex",flexDirection:'row',width:'100%',}}>
-   <Select onChange={(event)=>setPicker(event.label)} styles={props.customStyles} options={props.options}
+   <Select
+     onChange={(event)=>setPicker(event.label)} styles={props.customStyles} options={props.options}
          isSearchable={true}
        />
   </div>
@@ -63,9 +61,9 @@ const AddForm = (props) => {
     <Form.Label  style={{textAlign: "left",fontSize: "30px",width: "100%"}}>Time</Form.Label>
     <TimePicker
 
-onTimeChange={props.onTimeChange}    
+onTimeChange={(options)=>setTime(options.hour +":"+ options.minute+" "+options.meridiem)}    
 style={{width:'100%'}}
-time={props.time} // initial time, default current time
+time={time} // initial time, default current time
 
 timeMode="12" // use 24 or 12 hours mode, default 24
 /> 
@@ -77,8 +75,8 @@ timeMode="12" // use 24 or 12 hours mode, default 24
       className="datePicker"
     style={{width:"100%",fontSize:"30px"}}
     format="dd-MM-y"
-  onChange={(item)=>{}}
-  value={new Date()}
+  onChange={(item)=>{setDate(item)}}
+  value={date}
       
 />
       </div>
@@ -188,18 +186,10 @@ class AddClassForm extends React.Component {
       this.setState({subject:event.label})
       
     }
-    handleSubmit(){
-      const newRequest={
-        id:this.state.id,
-        name:"",
-        email:"test@g.com",
-        subject:this.state.subject,
-        fees:this.state.fees,
-        time:this.state.time,
-        date:this.state.date,
-        status:"pending"
-      }
-      this.props.addData(newRequest)
+    handleSubmit(data){
+
+      this.props.addData(data)
+      this.props.addDonation(data)
       // console.log(newRequest)
       // const headers = {
       //   'Content-Type': 'application/json',
@@ -230,6 +220,9 @@ class AddClassForm extends React.Component {
       })
       return (
       <AddForm customStyles={this.customStyles}
+      handleSubmit={this.handleSubmit}
+      addDonation={this.props.addDonation}
+      data={this.props.data}
       options={this.options}  time={this.state.time}/>
   
       );
@@ -245,7 +238,12 @@ class AddClassForm extends React.Component {
               },
     
     }
-  export default AddClassForm;
+    const mapDispatchToProps = dispatch => ({
+
+      addDonation: (item) => dispatch(addDonation(item)),
+    });
+    
+    export default  connect(null,mapDispatchToProps)(AddClassForm);
 
 
 //   <div  >

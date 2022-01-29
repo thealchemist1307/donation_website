@@ -33,8 +33,8 @@ class AddClass extends React.Component {
           <ToastProvider>
           <Container fluid>
           <Row>
-            <Col style={styles.enrolledCol}  ><EnrolledClass data={this.state.data} /></Col>
-            <Col style={styles.form}><AddClassForm addData={this.addData}/></Col>
+            <Col style={styles.enrolledCol}  ><EnrolledClass data={this.props.user} /></Col>
+            <Col style={styles.form}><AddClassForm data={this.props.user} addData={this.addData}/></Col>
           </Row>
           </Container>
           </ToastProvider>
@@ -71,5 +71,10 @@ justifyContent:"space-around"}
 const mapDispatchToProps = dispatch => ({
   donation: (item) => dispatch(donation(item)),
 });
-    
-export default connect(null,mapDispatchToProps)(AddClass);
+const mapStateToProps = state => {
+  return {
+      user: state.userDetails.accDetails,
+
+  }
+};
+export default connect(mapStateToProps,mapDispatchToProps)(AddClass);

@@ -24,6 +24,7 @@ const SigninForm = (props) => {
       }
       else{
         console.log("Login Sucess")
+        props.login(item)
         history.push("/Donator/")
       }
     }
@@ -75,8 +76,55 @@ class DonatorSignin extends React.Component {
       {
         id:1,
         email:'shivammihsra@gmail.com',
-        password:"password"
-      }
+        password:"password",
+        noOfDonation:2,
+        donations:[
+          {
+            name:"Shivam Mishra",
+            subject:"Commodity 3",
+            time:"12:20 PM",
+            fees:"Address",
+            status:"",
+            date:"12/02/2022",
+            id:"2",
+          },
+          {
+            name:"Shivam Mishra",
+            subject:"Commodity 1",
+            time:"12:20 PM",
+            fees:"Address",
+            status:"",
+            date:"12/02/2022",
+            id:"1",
+          },
+        ]
+      },
+      {
+        id:2,
+        email:'nishit',
+        password:"password",
+        noOfDonation:2,
+        donations:[
+          {
+            name:"Shivam Mishra",
+            subject:"Commodity 3",
+            time:"12:20 PM",
+            fees:"Address",
+            status:"",
+            date:"12/02/2022",
+            id:"2",
+          },
+          {
+            name:"Shivam Mishra",
+            subject:"Commodity 1",
+            time:"12:20 PM",
+            fees:"Address",
+            status:"",
+            date:"12/02/2022",
+            id:"1",
+          },
+        ]
+      },
     ]
     var map=new Map()
     arr.map((item,index)=>{
@@ -94,7 +142,7 @@ class DonatorSignin extends React.Component {
         <div data-layer="41c1d55d-084a-4281-8d0e-562e88d0ade1" className="loginBox"></div>
 <ToastProvider>
         <div className="signIn" >
-          <SigninForm map={this.state.map} handleLogin={this.handleLogin}/>
+          <SigninForm map={this.state.map}  login={this.props.login}/>
         </div>
 </ToastProvider>
         <div data-layer="68ffe7aa-e32c-4b43-aa63-d4f8e43aad56" className="login2d0827ef">Donator Sign in</div>

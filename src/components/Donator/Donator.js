@@ -10,6 +10,7 @@ import { Container , Col , Row } from 'react-bootstrap'
 
 import AddClass from "./AddClass"
 import MyClass from "./MyClass"
+import { connect } from 'react-redux';
 function Donator() {
   let location = useLocation();
   console.log("Donator "+location.pathname)
@@ -38,5 +39,10 @@ function Donator() {
     </div>
   );
 }
+const mapStateToProps = state => {
+  return {
+      user: state.userDetails.accDetails,
 
-export default Donator;
+  }
+};
+export default connect(mapStateToProps)(Donator);

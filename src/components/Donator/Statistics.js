@@ -28,7 +28,7 @@ class Statistics extends React.Component {
 <h1 style={{color:"black",fontSize:"50px"}}>Statistics</h1>
           <div style={{paddingTop:"20px",paddingBottom:"20px",textAlign:'start'}}>
           <label style={{fontSize:"30px"}}>No. of Donation :</label>
-          <label style={{fontSize:"30px"}}>10</label> 
+          <label style={{fontSize:"30px"}}>{this.props.user.noOfDonation}</label> 
            
            </div>
           <div  style={{paddingTop:"20px",paddingBottom:"20px",textAlign:'start'}}>

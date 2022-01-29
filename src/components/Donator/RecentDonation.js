@@ -52,7 +52,7 @@ class RecentDonation extends React.Component {
     render() {
 
       
-      const cabcards = this.props.data.map((item, index) => {
+      const cabcards = this.props.data.donations.map((item, index) => {
        
        
         return (
